@@ -8,14 +8,25 @@ Alcuni prodotti (es. antipulci) avranno la caratteristica che saranno disponibil
 
 <?php
 
-require_once __DIR__ . "/Product.php";
-require_once __DIR__ . "/Cibo.php";
-require_once __DIR__ . "/Giochi.php";
+require_once __DIR__ . "/classi/Customer.php";
+require_once __DIR__ . "/classi/Cibo.php";
+require_once __DIR__ . "/classi/Giochi.php";
+require_once __DIR__ . "/classi/MetodoPagamento.php";
 
-$product = new Product(25, "pallina");
-$giochi = new Giochi(30, "corda", "verde", "15cm");
-$cibo = new Cibo(27, "crocchette", "pollo", "20 Maggio");
+$customer = new Customer();
+$customer->register("asd", "Dini");
+$customer->gestorePagamenti->add(new MetodoPagamento("mastercard", "5165422146", "548", "10/23"));
 
-var_dump($product);
-var_dump($cibo);
-var_dump($giochi);
+$products = [
+    new Cibo(13.40, "crocchette", ["farina", "pollo", "conservanti"], "12/22"),
+    new Cibo(10.80, "dentastix", ["farina", "droga per cani", "conservanti"], "12/24"),
+    new Giochi(15.65, "pallina", "verde", "30cm"),
+    new Giochi(9.99, "osso giocattolo", ["grigio", "bianco"], "50cm"),
+];
+
+$customer->cart->add($products[0]);
+$customer->cart->add($products[3]);
+
+
+$customer->checkout(0); 
+ 

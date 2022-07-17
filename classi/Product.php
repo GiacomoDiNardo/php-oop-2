@@ -4,12 +4,14 @@ class Product
 {
     private $prezzo;
     private $nome;
+    private $id;
 
 
     function __construct($_prezzo, $_nome)
     {
         $this->setPrezzo($_prezzo);
         $this->setNome($_nome);
+        $this->id = uniqid();
     }
 
     /**
@@ -50,6 +52,14 @@ class Product
         $this->nome = $nome;
 
         return $this;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
     }
 }
     
